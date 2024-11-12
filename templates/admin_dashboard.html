@@ -1,72 +1,149 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
+
+<!-- Admin Dashboard Section -->
 <section class="admin-dashboard">
-    <h2>Admin Dashboard</h2>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, {{ admin_name }}! Use the tools below to manage the shelter’s pets and adoption requests.</p>
 
-    <div class="dashboard-section">
-        <h3>Manage Pets</h3>
-        <a href="{{ url_for('add_pet') }}" class="button add-pet-button">Add New Pet</a>
-        <table class="dashboard-table">
-            <thead>
-                <tr>
-                    <th>Pet ID</th>
-                    <th>Name</th>
-                    <th>Breed</th>
-                    <th>Age</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for pet in pets %}
-                <tr>
-                    <td>{{ pet.id }}</td>
-                    <td>{{ pet.name }}</td>
-                    <td>{{ pet.breed }}</td>
-                    <td>{{ pet.age }}</td>
-                    <td>{{ pet.status }}</td>
-                    <td>
-                        <a href="{{ url_for('edit_pet', pet_id=pet.id) }}" class="button edit-button">Edit</a>
-                        <a href="{{ url_for('delete_pet', pet_id=pet.id) }}" class="button delete-button">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <!-- Dashboard Navigation -->
+        <div class="dashboard-nav">
+            <button class="btn btn-primary" onclick="showSection('managePets')">Manage Pets</button>
+            <button class="btn btn-primary" onclick="showSection('adoptionRequests')">Adoption Requests</button>
+            <button class="btn btn-primary" onclick="showSection('messages')">Messages</button>
+            <button class="btn btn-primary" onclick="showSection('addPet')">Add New Pet</button>
+        </div>
 
-    <div class="dashboard-section">
-        <h3>Adoption Applications</h3>
-        <table class="dashboard-table">
-            <thead>
-                <tr>
-                    <th>Application ID</th>
-                    <th>Applicant Name</th>
-                    <th>Pet Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for application in applications %}
-                <tr>
-                    <td>{{ application.id }}</td>
-                    <td>{{ application.full_name }}</td>
-                    <td>{{ application.pet_name }}</td>
-                    <td>{{ application.email }}</td>
-                    <td>{{ application.phone }}</td>
-                    <td>
-                        <a href="{{ url_for('view_application', application_id=application.id) }}" class="button view-button">View</a>
-                        <a href="{{ url_for('delete_application', application_id=application.id) }}" class="button delete-button">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <!-- Manage Pets Section -->
+        <div id="managePets" class="dashboard-section">
+            <h2>Manage Pets</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pet ID</th>
+                        <th>Pet Name</th>
+                        <th>Species</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pet in pets %}
+                    <tr>
+                        <td>{{ pet.id }}</td>
+                        <td>{{ pet.name }}</td>
+                        <td>{{ pet.species }}</td>
+                        <td>{{ pet.age }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_pet', pet_id=pet.id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ url_for('delete_pet', pet_id=pet.id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Adoption Requests Section -->
+        <div id="adoptionRequests" class="dashboard-section" style="display: none;">
+            <h2>Adoption Requests</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Applicant Name</th>
+                        <th>Pet Name</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in adoption_requests %}
+                    <tr>
+                        <td>{{ request.id }}</td>
+                        <td>{{ request.applicant_name }}</td>
+                        <td>{{ request.pet_name }}</td>
+                        <td>{{ request.contact }}</td>
+                        <td>{{ request.status }}</td>
+                        <td>
+                            <a href="{{ url_for('view_request', request_id=request.id) }}" class="btn btn-info">View</a>
+                            <a href="{{ url_for('approve_request', request_id=request.id) }}" class="btn btn-success">Approve</a>
+                            <a href="{{ url_for('reject_request', request_id=request.id) }}" class="btn btn-danger">Reject</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messages" class="dashboard-section" style="display: none;">
+            <h2>Messages</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Message ID</th>
+                        <th>Sender Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages %}
+                    <tr>
+                        <td>{{ message.id }}</td>
+                        <td>{{ message.sender_name }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.subject }}</td>
+                        <td>
+                            <a href="{{ url_for('view_message', message_id=message.id) }}" class="btn btn-info">View</a>
+                            <a href="{{ url_for('delete_message', message_id=message.id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add New Pet Section -->
+        <div id="addPet" class="dashboard-section" style="display: none;">
+            <h2>Add New Pet</h2>
+            <form action="{{ url_for('add_pet') }}" method="POST">
+                <div class="form-group">
+                    <label for="pet_name">Pet Name</label>
+                    <input type="text" id="pet_name" name="pet_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="species">Species</label>
+                    <input type="text" id="species" name="species" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Pet</button>
+            </form>
+        </div>
     </div>
 </section>
+
+<!-- JavaScript to show and hide sections dynamically -->
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.dashboard-section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+    }
+</script>
+
 {% endblock %}
