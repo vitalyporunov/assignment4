@@ -455,3 +455,96 @@ a {
 a:hover {
     text-decoration: underline;
 }
+/* Contact Us Page */
+.contact-us {
+    background-color: #f9f9f9;
+    padding: 3rem 0;
+}
+
+.contact-us .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.contact-us p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: #6200ea;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #3700b3;
+}
+
+.contact-info {
+    margin-top: 2rem;
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+.contact-info strong {
+    color: #333;
+}
+
+a {
+    color: #03a9f4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
