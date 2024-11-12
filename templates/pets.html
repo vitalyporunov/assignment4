@@ -1,20 +1,32 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Available Pets{% endblock %}
 
 {% block content %}
-<section class="pets-list">
-    <h2>Available Pets</h2>
-    <div class="pet-cards">
-        {% for pet in pets %}
-        <div class="pet-card">
-            <img src="{{ pet.image_url }}" alt="{{ pet.name }}">
-            <h3>{{ pet.name }}</h3>
-            <p>{{ pet.breed }}</p>
-            <p>Age: {{ pet.age }}</p>
-            <a href="{{ url_for('pet_profile', pet_id=pet.id) }}" class="button">View Profile</a>
+
+<!-- Pets Section -->
+<section class="pets">
+    <div class="container">
+        <h1>Available Pets for Adoption</h1>
+        <p>Discover the pets waiting for a loving home. Click on any pet to learn more about them.</p>
+
+        <div class="pet-grid">
+            {% for pet in pets %}
+            <div class="pet-card">
+                <img src="{{ pet.image_url }}" alt="Image of {{ pet.name }}">
+                <h3>{{ pet.name }}</h3>
+                <p><strong>Breed:</strong> {{ pet.breed }}</p>
+                <p><strong>Age:</strong> {{ pet.age }} years</p>
+                <p><strong>Gender:</strong> {{ pet.gender }}</p>
+                <a href="{{ url_for('pet_profile', pet_id=pet.id) }}" class="btn btn-secondary">View Details</a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+
+        {% if not pets %}
+        <p>No pets are available for adoption at this time. Please check back later!</p>
+        {% endif %}
     </div>
 </section>
+
 {% endblock %}
