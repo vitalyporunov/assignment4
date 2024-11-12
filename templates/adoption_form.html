@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Adoption Form{% endblock %}
+
+{% block content %}
+<section class="adoption-form-container">
+    <h2>Adoption Form</h2>
+    <form action="{{ url_for('adopt_pet', pet_id=pet.id) }}" method="POST">
+        <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" name="full_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="preferences">Pet Preferences (e.g., breed, age)</label>
+            <textarea id="preferences" name="preferences"></textarea>
+        </div>
+
+        <button type="submit" class="button submit-button">Submit Application</button>
+    </form>
+</section>
+{% endblock %}

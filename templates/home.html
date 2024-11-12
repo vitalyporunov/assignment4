@@ -1,11 +1,51 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home - Pet Adoption{% endblock %}
 
 {% block content %}
+
+<!-- Hero Section -->
 <section class="hero">
-    <h1>Welcome to Our Pet Shelter</h1>
-    <p>Adopt, don’t shop! Find your new furry friend today.</p>
-    <a href="{{ url_for('pets') }}" class="button">Browse Pets</a>
+    <div class="hero-content">
+        <h1>Find Your New Best Friend</h1>
+        <p>Adopt a pet and give them a loving forever home.</p>
+        <a href="{{ url_for('pets') }}" class="btn btn-primary">View Available Pets</a>
+    </div>
 </section>
+
+<!-- About Section -->
+<section class="about">
+    <div class="container">
+        <h2>About Our Shelter</h2>
+        <p>We are a dedicated shelter providing temporary homes for pets in need. Our mission is to connect these loving animals with kind families who can give them a second chance at happiness.</p>
+    </div>
+</section>
+
+<!-- Featured Pets Section -->
+<section class="featured-pets">
+    <div class="container">
+        <h2>Featured Pets</h2>
+        <div class="pet-grid">
+            {% for pet in featured_pets %}
+            <div class="pet-card">
+                <img src="{{ pet.image_url }}" alt="Image of {{ pet.name }}">
+                <h3>{{ pet.name }}</h3>
+                <p>Breed: {{ pet.breed }}</p>
+                <p>Age: {{ pet.age }} years</p>
+                <a href="{{ url_for('pet_profile', pet_id=pet.id) }}" class="btn btn-secondary">Learn More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Adopt?</h2>
+        <p>Click below to see all our pets waiting for a home.</p>
+        <a href="{{ url_for('pets') }}" class="btn btn-primary">Explore Pets</a>
+    </div>
+</section>
+
 {% endblock %}
