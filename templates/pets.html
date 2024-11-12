@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Pets{% endblock %}
+
+{% block content %}
+<section class="pets-list">
+    <h2>Available Pets</h2>
+    <div class="pet-cards">
+        {% for pet in pets %}
+        <div class="pet-card">
+            <img src="{{ pet.image_url }}" alt="{{ pet.name }}">
+            <h3>{{ pet.name }}</h3>
+            <p>{{ pet.breed }}</p>
+            <p>Age: {{ pet.age }}</p>
+            <a href="{{ url_for('pet_profile', pet_id=pet.id) }}" class="button">View Profile</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

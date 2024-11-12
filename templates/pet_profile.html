@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pet.name }}'s Profile{% endblock %}
+
+{% block content %}
+<section class="pet-profile">
+    <img src="{{ pet.image_url }}" alt="{{ pet.name }}">
+    <h2>{{ pet.name }}</h2>
+    <p>Breed: {{ pet.breed }}</p>
+    <p>Age: {{ pet.age }}</p>
+    <p>Description: {{ pet.description }}</p>
+    <form action="{{ url_for('adopt_pet', pet_id=pet.id) }}" method="POST">
+        <button type="submit" class="button adopt-button">Adopt Me</button>
+    </form>
+</section>
+{% endblock %}
