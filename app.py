@@ -6,7 +6,7 @@ from models import db, Pet, AdoptionApplication
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-
+db.unit_app(app)
 # Define the main routes
 @app.route('/')
 def home():
@@ -80,3 +80,5 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Creates tables if they don't exist
     app.run(debug=True)
+
+app.config['DEBUG'] = True
