@@ -5,7 +5,7 @@ from models import db, Pet, AdoptionApplication
 
 app = Flask(__name__)
 app.config.from_object(Config)
-db.init_app(app)
+db = SQLAlchemy(app)
 
 # Define the main routes
 @app.route('/')
